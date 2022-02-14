@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Collezioni</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">INTERNATIONAL MUSEUM</p>
+	</nav>
+	<div>
+		<h4 class="titolo">Le nostre collezioni</h4>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="collezione : ${collezioni}">
+				<a href="collezione.html" th:href="@{'/collezione' + '/' + ${collezione.id}}">
+					<span class="el-lista" th:text="|${collezione.nome}|">Paolo Rossi</span></a>
+			</li>
+		</ul>
+	</div>
+	<span>
+		<a href="/default">
+			<button type="button" class="sub-button" style="margin:30px;">Indietro</button>
+		</a>
+	</span>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/basic.css}" rel="stylesheet">
+	<head><title>Opere</title></head>
+<body>
+	<nav><p class="titolo">INTERNATIONAL MUSEUM</p></nav>
+	<div>
+    	<h4 class="titolo">Le nostre opere</h4>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="opera : ${opere}">
+				<a href="opera.html" 
+				   th:href="@{'/opera' + '/' + ${opera.id}}">
+				   <span class="el-lista"  th:text="${opera.titolo}">Paolo Rossi</span></a>
+			</li>
+		</ul>
+	</div>
+	<span>
+		<a href="/default">
+			<button type="button" class="sub-button" style="margin:30px;">Indietro</button>
+		</a>
+	</span>
+</body>
+</html>

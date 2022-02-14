@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Artista</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">INTERNATIONAL MUSEUM</p>
+	</nav>
+
+	<div th:if="${artista}" th:object="${artista}" style="display: flex; justify-content: center;">
+		<div class="box" style="display: flex;width: 400px;background-color: khaki">
+			<div><img th:src="@{${'/images/'+artista.immagine}}" /></div>
+			<div class="info">
+				Nome:<span th:text="*{nome}">qui-va-nome</span><br>
+				Cognome:<span th:text="*{cognome}">qui-va-cognome</span><br>
+				Data di Nascita:<span th:text="*{dataDiNascita}">qui-va-dataNascita</span><br>
+				Luogo di Nascita:<span th:text="*{luogoDiNascita}">qui-va-luogoNascita</span><br>
+
+			</div>
+		</div>
+		<div class="box" style="width: 400px;background-color: powderblue;">
+			<h1>Le opere</h1>
+			
+				<ul>
+					<li th:each="opera : ${opereArtista}">
+						<a href="opera.html" th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo}|"
+							th:value="${opera.id}"></a>
+					</li>
+				</ul>
+			
+			<div th:unless="${artista}">Non esiste</div>
+		</div>
+	</div>
+	<div><a href="/default"><button class="sub-button"
+				style="margin-top: 19px;">Home</button></a></div>
+
+</body>
+
+</html>

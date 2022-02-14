@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/basic.css}" rel="stylesheet">
+	<head><title>Interventi</title></head>
+<body>
+	<nav><p class="titolo">OFFCINE ROMA</p></nav>
+	<div>
+    	<h4 class="titolo">I nostri Interventi</h4>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="intervento : ${interventi}">
+				<a href="intervento.html" 
+				   th:href="@{'/intervento' + '/' + ${intervento.id}}">
+				   <span class="el-lista"  th:text="${intervento.nome}">AAAAAA</span></a>
+			</li>
+		</ul>
+	</div>
+	<span>
+		<a href="/default">
+			<button type="button" class="sub-button" style="margin:30px;"th:text="#{indietro}">Indietro</button>
+		</a>
+	</span>
+</body>
+</html>

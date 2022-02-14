@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/homeCSS.css}" rel="stylesheet">
+	<head></head>
+<body>
+	<nav><p class="titolo">OFFCINE ROMA</p></nav>
+	<header>	
+		<div class="headerButtonsIndex">
+			<a  th:href="@{/login}" ><button class="sub-button" th:text="#{index.login}">Accedi</button></a>
+			<a  th:href="@{/register}" ><button class="sub-button" th:text="#{index.register}">Registrati</button></a>
+		</div>	
+	</header>
+	<section>
+		<div id="flex">
+			
+			<img th:src="@{${'/images/Officina_1.jpg'}}"/>
+			<img th:src="@{${'/images/Officina_2.jpg'}}"/>
+			<img th:src="@{${'/images/Officina_3.jpg'}}"/>
+		</div>
+	</section>
+    <footer></footer>
+</body>
+</html>

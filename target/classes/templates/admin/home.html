@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+    <title>Admin Panel</title>
+</head>
+
+<body>
+    <section>
+        <h4 th:text="#{header.index}" class="titolo">Menu</h4>
+        <div>
+           <a href="/admin/addMeccanico"><button class="button" style="background-color:gold ;box-shadow:0 9px goldenrod;"th:text="#{ins.meccanico}">Inserisci dati meccanico</button></a>
+        </div>
+       
+        <div>
+            <a href="/admin/addTipologiaIntervento"><button class="button" style="background-color: crimson;box-shadow: 0 9px darkred;"th:text="#{ins.tipologiaIntervento}">Inserisci dati della Tipologia Intervento</button></a>
+        </div>
+      
+        <div>
+            <a href="/admin/addIntervento"><button class="button" style="background-color: green; box-shadow: 0 9px darkgreen;"th:text="#{ins.intervento}">Inserisci dati intervento</button></a>
+        </div>
+        <div>
+            <a href="/default"><button class="button" style="background-color: whitesmoke; box-shadow: 0 9px lightgrey;"th:text="#{indietro}">Torna indietro</button> </a>
+        </div>
+
+    </section>
+    <br>
+</body>
+
+</html>

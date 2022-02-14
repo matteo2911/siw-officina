@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Inserisci Tipologia Interventi</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">OFFCINE ROMA</p>
+	</nav>
+
+	<form th:action="@{/admin/tipologiaIntervento}" method="POST" th:object="${tipologiaIntervento}">
+		<h4 class="titolo">Inserisci i dati di una tipologia di intervento</h4>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div style="text-align: right;margin-right: 35%;">
+			<div>
+				<span class="campo-form">Nome:</span>
+				<span><input type="text" th:field="*{nome}" /></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Descrizione:</span>
+				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Costo:</span>
+				<span><input type="text" th:field="*{costo}" /></span>
+				<span th:if="${#fields.hasErrors('costo')}" th:errors="*{costo}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Codice:</span>
+				<span><input type="text" th:field="*{codice}" /></span>
+				<span th:if="${#fields.hasErrors('codice')}" th:errors="*{codice}"></span>
+			</div>
+			<br>
+		</div>
+		<div>
+			<span><button type="submit" class="sub-button"th:text="#{invio}">Invio</button></span>
+			<span><button type="reset" class="sub-button"th:text="#{cancella}">Cancella</button></span>
+			<span><a href="/admin/adminPanel"><button type="button" class="sub-button"th:text="#{indietro}">Indietro</button></a></span>
+		</div>
+	</form>
+	
+</body>
+
+</html>

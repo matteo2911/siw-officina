@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Inserisci Opera</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">ROME MUSEUM</p>
+	</nav>
+	<form th:action="@{/admin/opera}" method="POST" th:object="${opera}">
+		<h4 class="titolo">Inserisci i dati di un'opera</h4>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div style="text-align: right;margin-right: 35%;">
+			<div>
+				<span class="campo-form">Titolo:</span>
+				<span><input type="text" th:field="*{titolo}" /></span>
+				<span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Descrizione:</span>
+				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Immagine:</span>
+				<span><input type="text" th:field="*{immagine}" /></span>
+				<span th:if="${#fields.hasErrors('immagine')}" th:errors="*{immagine}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Anno di realizzazione:</span>
+				<span><input type="text" th:field="*{annoDiRealizzazione}" /></span>
+			</div>
+			<div>
+				<span class="campo-form">Artista:</span>
+				<select class="input2" name="artista" roleId="artista" id="artista" th:field="*{artista}">
+					<option value="">---Artista---</option>
+					<option th:each="artista : ${artisti}" th:value="${artista.id}" th:text="${artista.nome} +' '+ ${artista.cognome}">
+					</option>
+				</select>
+			</div>
+			<br>
+			
+		</div>
+		<div>
+			<span><button type="submit" class="sub-button">Invio</button></span>
+			<span><button type="reset" class="sub-button">Cancella</button></span>
+			<span><a href="/admin/adminPanel"><button type="button" class="sub-button">Indietro</button></a></span>
+		</div>
+	</form>
+
+	
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Meccanico</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo"OFFCINE ROMA</p>
+	</nav>
+
+	<div th:if="${meccanico}" th:object="${meccanico}" style="display: flex; justify-content: center;">
+		  <div class="box" style="display: flex;width: 400px;background-color: khaki">
+			<div class="info">
+			<h1> Il meccanico: </h1>
+				Nome:<span th:text="*{nome}">qui-va-nome</span><br>
+				Cognome:<span th:text="*{cognome}">qui-va-cognome</span><br>
+				Recapito:<span th:text="*{recapito}">qui-va-recapito</span><br>
+			</div>
+		</div>
+		<div class="box" style="width: 400px;background-color: powderblue;">
+			<h1>I suoi interventi:</h1>
+			    <ul>
+					<li th:each="intervento : ${interventiMeccanico}">
+						<a href="interveto.html" th:href="@{'/intervento' + '/' + ${intervento.id}}" th:text="|${intervento.nome}|"
+							th:value="${intervento.id}"></a>
+					</li>
+				</ul>
+			
+			<div th:unless="${meccanico}">Non esiste</div>
+		</div>
+	</div>
+	
+	<div class="flex-container2">
+		<div>
+			<form th:if="${credentials.role == 'ADMIN'}" th:action="@{'/admin/eliminaMeccanico' + '/' + ${meccanico.id}}"
+				method="POST">
+				<button class="sub-button" type="submit" th:text="#{elimina.meccanico}"></button>
+			</form>
+		</div>
+
+		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
+
+	</div>
+</body>
+
+</html>

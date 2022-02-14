@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<body>
+	<nav>
+		<p class="titolo">INTERNATIONAL MUSEUM</p>
+	</nav>
+	<div th:if="${opera}" th:object="${opera}" class="flex-container">
+		<div><img th:src="@{${'/images/'+opera.immagine}}" /></div>
+		<div class="info">
+			Titolo: <span th:text="*{titolo}">qui-va-titolo</span><br>
+			Descrizione: <span th:text="*{descrizione}">qui-va-descrizione</span><br>
+			Anno di realizzazione: <span th:text="*{annoDiRealizzazione}">qui-va-anno</span><br>
+
+			Artista: <span>
+				<a href="artista.html" th:href="@{'/artista' + '/' + ${artista.id}}"
+					th:text="|${artista.nome} ${artista.cognome}|"></a>
+			</span>
+		</div>
+	</div>
+	<div th:unless="${opera}">Non esiste</div>
+	<div class="flex-container2">
+		<div>
+			<form th:if="${credentials.role == 'ADMIN'}" th:action="@{'/admin/eliminaOpera' + '/' + ${opera.id}}"
+				method="POST">
+				<button class="sub-button" type="submit" th:text="#{elimina.opera}"></button>
+			</form>
+		</div>
+
+		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
+
+	</div>
+</body>
+
+</html>

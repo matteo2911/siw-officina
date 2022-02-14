@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/basic.css}" rel="stylesheet">
+	<head><title>Artisti</title></head>
+<body>
+	<nav><p class="titolo">INTERNATIONAL MUSEUM</p></nav>
+	<div>
+    	<h4 class="titolo">I nostri artisti</h4>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="artista : ${artisti}">
+				<a href="artista.html" 
+				   th:href="@{'/artista' + '/' + ${artista.id}}" ><span class="el-lista"  th:text="|${artista.nome} ${artista.cognome}|">Paolo Rossi</span></a>
+			</li>
+		</ul>
+	</div>
+	<span><a href="/default"><button type="button" class="sub-button" style="margin:30px;">Indietro</button></a></span>
+
+</body>
+</html>

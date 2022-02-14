@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>AGGIUNGI PRENOTAZIONE</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">OFFCINE ROMA</p>
+	</nav>
+	<form th:action="@{/prenotazione}" method="POST" th:object="${prenotazione}">
+		<h1>Inserisci i dati per la prenotazione</h1>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div style="text-align: right;margin-right: 35%;">
+			<div>
+				<span class="campo-form">Data prenotazione:</span>
+				<span><input type="date" th:field="*{dataPrenotazione}" /></span>
+				<span th:if="${#fields.hasErrors('dataPrenotazione')}" th:errors="*{dataPrenotazione}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Ora prenotazione:</span>
+				<span><input type="number" th:field="*{oraPrenotazione}" /></span>
+				<span th:if="${#fields.hasErrors('oraPrenotazione')}" th:errors="*{oraPrenotazione}"></span>
+			</div>
+			<div>
+				<span class="campo-form">intervento:</span>
+				<select class="input2" name="intervento" roleId="intervento" id="intervento" th:field="*{intervento}">
+					<option value="">---Intervento---</option>
+					<option th:each="intervento : ${interventi}" th:value="${intervento.id}" th:text="${intervento.nome} ">
+					</option>
+				</select>
+			</div>
+		</div>
+		<div>
+			<span><button type="submit" class="sub-button"th:text="#{prenota}">Invio</button></span>
+			<span><button type="reset" class="sub-button"th:text="#{cancella}">Cancella</button></span>
+			<span><a href="/default"><button type="button" class="sub-button"th:text="#{indietro}">Indietro</button></a></span>
+		</div>
+	</form>
+
+	
+</body>
+
+</html>

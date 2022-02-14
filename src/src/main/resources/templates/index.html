@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/homeCSS.css}" rel="stylesheet">
+	<head></head>
+<body>
+	<nav><p class="titolo">ROME MUSEUM</p></nav>
+	<header>	
+		<div class="headerButtonsIndex">
+			<a class="button" th:href="@{/login}" th:text="#{index.login}">Accedi</a>
+			<a class="button" th:href="@{/register}" th:text="#{index.register}">Registrati</a>
+		</div>	
+	</header>
+	<section>
+		<div id="flex">
+			
+			<img th:src="@{${'/images/Gioconda.jpg'}}"/>
+			<img th:src="@{${'/images/SalvadorMundi.jpg'}}"/>
+			<img th:src="@{${'/images/UomoVitruviano.jpg'}}"/>
+		</div>
+	</section>
+    <footer></footer>
+</body>
+</html>

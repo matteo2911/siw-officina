@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+    <title>Homepage</title>
+</head>
+
+<body>
+    <section>
+        
+        <h1 class="titolo">Ciao <span th:text="${credentials.username}">qui-va-username</span>!</h1>
+        <div>
+            <span th:if="${credentials.role == 'ADMIN'}">
+                <a href="/admin/adminPanel">
+                    <button class="button" style="background-color:gold ;box-shadow:0 9px goldenrod;">Admin Panel</button>
+                </a>
+            </span>
+        </div>
+        <div>
+            <a href="artista">
+                <button class="button" style="background-color: crimson;box-shadow: 0 9px darkred;">Elenco artisti
+                </button>
+            </a>
+        </div>
+
+        <div>
+             <a href="collezione"><button class="button" style="background-color: green; box-shadow: 0 9px darkgreen;">Elenco collezioni</button></a>
+        </div>
+
+        <div>
+            <a href="opere"><button class="button" style="background-color: deepskyblue; box-shadow: 0 9px dodgerblue;"> Elenco opere</button></a>
+        </div>
+        <div>
+           <a th:href="@{/logout}"> <button class="button" style="background-color: whitesmoke; box-shadow: 0 9px lightgrey;"> Logout</button></a>
+        </div>
+
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+    <title>Admin Panel</title>
+</head>
+
+<body>
+    <section>
+        <h4 th:text="#{header.index}" class="titolo">Menu</h4>
+        <div>
+           <a href="/admin/addArtista"><button class="button" style="background-color:gold ;box-shadow:0 9px goldenrod;">Inserisci dati artista</button></a>
+        </div>
+       
+        <div>
+            <a href="/admin/addCollezione"><button class="button" style="background-color: crimson;box-shadow: 0 9px darkred;">Inserisci dati collezione</button></a>
+        </div>
+      
+        <div>
+            <a href="/admin/addOpera"><button class="button" style="background-color: green; box-shadow: 0 9px darkgreen;">Inserisci dati opera</button></a>
+        </div>
+        <div>
+            <a href="/default"><button class="button" style="background-color: whitesmoke; box-shadow: 0 9px lightgrey;">Torna indietro</button> </a>
+        </div>
+
+    </section>
+    <br>
+</body>
+
+</html>

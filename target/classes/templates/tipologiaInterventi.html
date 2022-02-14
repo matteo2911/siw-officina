@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Tipologia Interventi</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">OFFICINE ROMA</p>
+	</nav>
+	<div>
+		<h4 class="titolo">Le nostre Tipologie di interventi</h4>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="tipologiaIntervento : ${tipologiaInterventi}">
+				<a href="tipologiaIntervento.html" th:href="@{'/tipologiaIntervento' + '/' + ${tipologiaIntervento.id}}">
+				     <span class="el-lista" th:text="|${tipologiaIntervento.nome}|">AAAAAA</span></a>
+			</li>
+		</ul>
+	</div>
+	<span>
+		<a href="/default">
+			<button type="button" class="sub-button" style="margin:30px;"th:text="#{indietro}">Indietro</button>
+		</a>
+	</span>
+</body>
+
+</html>

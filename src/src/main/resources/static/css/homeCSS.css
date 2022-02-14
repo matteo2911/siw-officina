@@ -1,0 +1,80 @@
+html{
+	background: url(/images/SfondoMulti.jpeg) no-repeat center center fixed;
+	background-size: cover;
+	height: 100%;
+	overflow: hidden;
+}
+body{
+	
+}
+a{
+    text-decoration:none;
+}
+nav{
+	height: 75px;
+	
+	text-align:center;
+	font-size:30px;
+	font-family:Arial;
+}
+.titolo{
+	padding-top:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:40px;
+	text-shadow: 0 0 3px whitesmoke, 0 0 5px whitesmoke;
+}
+header{
+	height: 50px;
+	
+}
+.headerButtons{
+	padding-top: 15px;
+	padding-left: 15px;
+}
+
+.headerButtonsIndex{
+	padding-top: 15px;
+	text-align: center;
+}
+
+.flex-container{
+	justify-content: center;
+	display: flex;
+	border:2px solid;
+}
+
+img{
+	
+	margin:15px;
+	height:300px;
+	border: 4px solid midnightblue;
+}
+
+footer{
+	height:100px;
+
+}
+#flex{
+	display: flex;
+    margin-top: 20px;
+    justify-content: center;
+
+}
+
+
+.button{
+	background-color: whitesmoke; 
+	box-shadow: 0 9px lightgrey;
+    color: #fff;
+	text-shadow: 0 0 3px black, 0 0 5px black;
+    padding: 6px 30px;
+    border-radius: 100px 4%;
+    justify-content: center;
+    margin: 10px;
+    min-width: 170px;
+    min-height: 35px;
+    font-size: 20px;
+	font-weight: bold;
+	font-family:Arial, Helvetica, sans-serif;
+}

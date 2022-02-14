@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Prenotazione</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo"OFFCINE ROMA</p>
+	</nav>
+     <h1> LA TUA PRENOTAZIONE: </h1>
+	<div th:if="${prenotazione}" th:object="${prenotazione}" style="display: flex; justify-content: center;">
+		  <div class="box" style="display: flex;width: 400px;background-color: khaki">
+			<div class="info">
+				Data prenotazione:<span th:text="*{dataPrenotazione}">qui-va-data</span><br>
+				Ora prenotazione:<span th:text="*{oraPrenotazione}">qui-va-ora</span><br>
+				Intervento:<span><a href="intervento.html" th:href="@{'/intervento' + '/' + ${intervento.id}}"
+					       th:text="|${intervento.nome}|"></a></span>
+			</div>
+	</div>
+	</div>
+		<div class="flex-container2">
+		<div>
+			<form th:action="@{'/eliminaPrenotazione' + '/' + ${prenotazione.id}}"
+				method="POST">
+				<button class="sub-button" type="submit" th:text="#{elimina.prenotazione}"></button>
+			</form>
+		</div>
+		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
+
+	</div>
+
+
+</body>
+
+</html>

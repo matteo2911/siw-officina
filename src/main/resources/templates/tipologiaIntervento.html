@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/basic.css}" rel="stylesheet">
+<body>
+	<nav><p class="titolo">OFFCINE ROMA</p></nav>
+    <div style="display: flex; justify-content: center;" >
+    	<div class="box" style="background-color: khaki" th:if="${tipologiaIntervento}" th:object="${tipologiaIntervento}">
+		<p><b>TIPOLOGIA INTERVENTO:</b></p>
+			Nome: <span th:text="*{nome}">qui-va-nome</span><br>
+			Descrizione: <span th:text="*{descrizione}">qui-va-descrizione</span><br>
+   		</div>
+		<div class="box" style="background-color: powderblue;">
+			<p><b>GLI INTERVENTI:</b></p>
+			<ul>
+				<li th:each="intervento : ${interventiTipologiaIntervento}">
+					<a href="intervento.html" 
+					   th:href="@{'/intervento' + '/' + ${intervento.id}}" 
+					   th:text="|${intervento.nome}|"
+					   th:value="${intervento.id}"></a>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="box" style="background-color: lightcoral;" th:if="${credentials.role == 'ADMIN'}">
+			<div>
+				<p><b>AGGIUNGI INTERVENTO A LISTA DI INTERVENTI</b></p>
+				<form th:action="@{'/admin/addInterventoATipologiaIntervento' + '/' + ${tipologiaIntervento.id}}" method="POST" >
+					<select name="intervento" id="intervento">
+					<option value="">---Intervento---</option>
+					<option th:each="intervento : ${interventi}"
+						th:value="${intervento.id}"
+						th:text="${intervento.nome}"></option>
+					</select>
+					<div>
+						<button style="border-radius:15px;border:solid 1px ;margin-top: 3px;" type="submit" th:text="#{aggiungi.intervento}"></button>
+					</div>		
+				</form>
+			</div>
+			<div th:if="${credentials.role == 'ADMIN'}">
+				<p><b>RIMUOVI INTERVENTO DA LISTA INTERVENTI</b></p>
+				<form th:action="@{'/admin/rimuoviIntervento' + '/' + ${tipologiaIntervento.id}}" method="POST" >
+					<select name="intervento" id="intervento">
+					<option value="">---Intervento---</option>
+					<option th:each="intervento : ${interventiTipologiaIntervento}"
+						th:value="${intervento.id}"
+						th:text="${intervento.nome}"></option>
+					</select>
+					<div>
+						<button style="border-radius:15px;border:solid 1px ;margin-top: 3px;" type="submit" th:text="#{rimuovi.intervento}"></button>
+					</div>		
+				</form>
+		
+			</div>
+		</div>
+
+    	<div th:unless="${tipologiaIntervento}">Non esiste</div>
+    </div>
+	<div class="flex-container2">
+		<div>
+			<form th:if="${credentials.role == 'ADMIN'}" th:action="@{'/admin/eliminaTipologiaIntervento' + '/' + ${tipologiaIntervento.id}}"
+				method="POST">
+				<button class="sub-button" type="submit" th:text="#{elimina.tipologiaIntervento}"></button>
+			</form>
+		</div>
+
+		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
+
+	</div>
+</body>
+</html>

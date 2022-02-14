@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/basic.css}" rel="stylesheet">
+
+<head>
+	<title>Inserisci Collezione</title>
+</head>
+
+<body>
+	<nav>
+		<p class="titolo">ROME MUSEUM</p>
+	</nav>
+
+	<form th:action="@{/admin/collezione}" method="POST" th:object="${collezione}">
+		<h4 class="titolo">Inserisci i dati di una Collezione</h4>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div style="text-align: right;margin-right: 35%;">
+			<div>
+				<span class="campo-form">Nome:</span>
+				<span><input type="text" th:field="*{nome}" /></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Descrizione:</span>
+				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+			</div>
+			<div>
+				<span class="campo-form">Curatore:</span>
+				<select class="input2" name="curatore" id="curatore" th:field="*{curatore}">
+					<option value="">---Seleziona---</option>
+					<option th:each="curatore : ${curatori}" th:value="${curatore.id}" th:text="${curatore.nome}">
+					</option>
+				</select>
+			</div>
+			<br>
+		</div>
+		<div>
+			<span><button type="submit" class="sub-button">Invio</button></span>
+			<span><button type="reset" class="sub-button">Cancella</button></span>
+			<span><a href="/admin/adminPanel"><button type="button" class="sub-button">Indietro</button></a></span>
+		</div>
+	</form>
+	
+</body>
+
+</html>

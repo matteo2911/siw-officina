@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link th:href="@{/css/basic.css}" rel="stylesheet">
+	<head><title>Meccanici</title></head>
+<body>
+	<nav><p class="titolo">OFFCINE ROMA</p></nav>
+	<div>
+		<ul style="margin-right: 2%;">
+			<li style="margin-top: 25px;" th:each="meccanico : ${meccanici}">
+				<a href="meccanico.html" 
+				   th:href="@{'/meccanico' + '/' + ${meccanico.id}}" ><span class="el-lista"  th:text="|${meccanico.nome} ${meccanico.cognome}|">Paolo Rossi</span></a>
+			</li>
+		</ul>
+	</div>
+	<span><a href="/default"><button type="button" class="sub-button" style="margin:30px;"th:text="#{indietro}">Indietro</button></a></span>
+
+</body>
+</html>
