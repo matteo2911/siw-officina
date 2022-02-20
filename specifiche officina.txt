@@ -1,0 +1,15 @@
+UC.1) Un cliente può utilizzare il sistema per registrarsi.  
+UC.2) Un utente può utilizzare il sistema per effettuare il login.  
+UC.3) Un utente loggato può visionare le tipologie di interventi,gli interventi, i meccanici che l'officina offre.
+UC.4) Un amministratore può usare il sistema per inserire i dati di un meccanico, un intervento , una tipologia di interventi.  
+UC.5) Un amministratore può aggiungere può rimuovere e aggiungere interventi dalla tipologia di interventi.  
+UC.6) Un amministratore può eliminare interventi e meccanici e tipologie di interventi.  
+UC.7) Un utente loggato può prenotare un intervento  
+UC.8) Un utente loggato può annullare la prenotazione di un intervento  
+UC.9) Un utente loggato può visionare la lista delle sue prenotazioni.
+
+
+Modello di dominio: 
+Nell'officina ho più interventi. Ogni intervento ha un nome, una breve descrizione ed è effettuato da un meccanico che ha un nome, un cognome e un recapito.
+Un meccanico può effettuare più interventi. Una tipologia di interventi ha un nome, un codice,una descrizione ed un costo. Una prenotazione ha un data di prenotazione ed un'ora di prenotazione oltre il nome dell'intervento che viene effettuato.
+
