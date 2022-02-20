@@ -8,7 +8,8 @@
 		<ul style="margin-right: 2%;">
 			<li style="margin-top: 25px;" th:each="prenotazione : ${prenotazioni}">
 				<a href="prenotazione.html" 
-				   th:href="@{'/prenotazione' + '/' + ${prenotazione.id}}" ><span class="el-lista"  th:text="|${prenotazione.intervento.nome}|">Paolo Rossi</span></a>
+				   th:href="@{'/admin/prenotazioneClienti' + '/' + ${prenotazione.id}}" ><span class="el-lista"  
+				   th:text="|${prenotazione.intervento.nome} , ${prenotazione.cliente.nome} ${prenotazione.cliente.cognome} |">Paolo Rossi</span></a>
 			</li>
 		</ul>
 	</div>

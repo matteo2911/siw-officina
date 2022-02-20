@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Intervento;
 import it.uniroma3.siw.spring.model.Meccanico;
+import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.repository.MeccanicoRepository;
 
 
@@ -23,6 +25,12 @@ public class MeccanicoService {
 	
 	@Autowired
 	private MeccanicoRepository MeccanicoRepository; 
+	
+	@Autowired
+	private InterventoService interventoService;
+	
+	@Autowired
+	private PrenotazioneService prenotazioneService;
 	
 	@Transactional
 	public Meccanico inserisci(Meccanico meccanico) {
@@ -70,5 +78,54 @@ public class MeccanicoService {
 		this.credentialsService = credentialsService;
 	}
 	
+	@Transactional
+	public List<Intervento> getInterventiMeccanico(Meccanico m){
+		
+		
+		List<Intervento> lista = new ArrayList<>();
+		
+		for(Intervento i: interventoService.tutti()) {
+			if(i.getMeccanico()== m)
+				lista.add(i);
+		}
+		return lista;
+	}
 	
+	public InterventoService getInterventoService() {
+		return interventoService;
+	}
+	
+	@Transactional
+	public Boolean isMeccanicoLibero(Prenotazione p) {
+		Meccanico m= p.getIntervento().getMeccanico();
+		Boolean libero= true;
+		
+			for(Intervento i:m.getInterventi()) {
+				
+				for(Prenotazione o: i.getPrenotazioni()) {
+					
+					if(o.getDataPrenotazione()==p.getDataPrenotazione() && o.getOraPrenotazione()==p.getOraPrenotazione())
+						libero=false;
+				}
+			}
+		
+	return libero;
+	}
+	
+	@Transactional
+	public List<Prenotazione> getPrenotazioniMeccanico(Meccanico m){
+		
+		
+		List<Prenotazione> lista = new ArrayList<>();
+		
+		for(Prenotazione p: prenotazioneService.tutti()) {
+			if(p.getIntervento().getMeccanico()== m)
+				lista.add(p);
+		}
+		return lista;
+	}
+	
+	public PrenotazioneService getPrenotazioneService() {
+		return prenotazioneService;
+	}
 }

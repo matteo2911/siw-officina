@@ -31,7 +31,13 @@ public class TipologiaInterventoService {
 	public InterventoService getInterventoService() {
 		return interventoService;
 	}
-
+    
+	@Transactional
+	public TipologiaIntervento tipologiaInterventoPerId(int id) {
+		return tipologiaInterventoRepository.findById(id);
+	}
+	
+	
 	@Transactional
 	public TipologiaIntervento inserisci(TipologiaIntervento tipologiaIntervento) {
 		return tipologiaInterventoRepository.save(tipologiaIntervento);

@@ -4,20 +4,22 @@
 
 <body>
 	<nav>
-		<p class="titolo"OFFCINE ROMA</p>
+		<p class="titolo"OFFICINE ROMA</p>
 	</nav>
 	<div th:if="${intervento}" th:object="${intervento}" style="display: flex; justify-content: center;">
 		  <div class="box" style="display: flex;width: 400px;background-color: khaki">
 			<div class="info">
+			<h1> Intervento: </h1>
 				Nome:<span th:text="*{nome}">qui-va-nome</span><br>
 				Descrizione:<span th:text="*{descrizione}">qui-va-descrizione</span><br>
 				Meccanico:<span><a href="meccanico.html" th:href="@{'/meccanico' + '/' + ${meccanico.id}}"
 					       th:text="|${meccanico.nome} ${meccanico.cognome}|"></a></span>
 		    </div>
-	      </div>
+	     </div>
     </div>
 
 	<div th:unless="${intervento}">Non esiste</div>
+	
 			<div class="flex-container2">
 		<div>
 			<form th:if="${credentials.role == 'ADMIN'}" th:action="@{'/admin/eliminaIntervento' + '/' + ${intervento.id}}"
@@ -25,7 +27,6 @@
 				<button class="sub-button" type="submit" th:text="#{elimina.intervento}"></button>
 			</form>
 		</div>
-	
 		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
 
 	</div>

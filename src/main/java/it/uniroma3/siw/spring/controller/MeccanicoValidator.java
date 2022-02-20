@@ -29,9 +29,8 @@ public class MeccanicoValidator implements Validator {
 			logger.debug("confermato: valori non nulli");
 			if (this.meccanicoService.alreadyExists((Meccanico)m)) {
 				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
+				errors.reject("meccanicoEsiste");
 			}
-		
 		}
 	}
 

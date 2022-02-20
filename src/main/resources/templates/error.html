@@ -5,16 +5,18 @@
 background-color:lightblue;
 }</style>
    </head>
-   <h1>Error!</h1>
+   <h1>ERRORE</h1>
    <div class="errorPage">
       <br />
       <p>
-         There seems to be a problem with the page you requested
+         Errore:
 (
-         <span th:text="${path}" />
+         <span th:text="*{errore}" />
+         
          ).
       </p>
       <p th:text="${'Details: ' + message}" />
       <p th:text="${'Status: ' + status}" />
+      <div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
    </div>
 </html>

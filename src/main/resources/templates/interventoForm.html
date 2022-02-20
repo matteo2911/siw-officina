@@ -8,27 +8,27 @@
 
 <body>
 	<nav>
-		<p class="titolo">OFFCINE ROMA</p>
+		<p class="titolo">OFFICINE ROMA</p>
 	</nav>
 	<form th:action="@{/admin/intervento}" method="POST" th:object="${intervento}">
-		<h4 class="nome">Inserisci i dati di un intervento</h4>
+		<h4 class="titolo">Inserisci i dati di un intervento</h4>
 		<div th:if="${#fields.hasGlobalErrors()}">
 			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>
 		<div style="text-align: right;margin-right: 35%;">
 			<div>
 				<span class="campo-form">Nome:</span>
-				<span><input type="text" th:field="*{nome}" /></span>
+				<span><input type="text" th:field="*{nome}" required /></span>
 				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>
 			<div>
 				<span class="campo-form">Descrizione:</span>
-				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span><input type="text" th:field="*{descrizione}"  required/></span>
 				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 			</div>
 			<div>
 				<span class="campo-form">Meccanico:</span>
-				<select class="input2" name="meccanico" roleId="meccanico" id="meccanico" th:field="*{meccanico}">
+				<select class="input2" name="meccanico" roleId="meccanico" id="meccanico" th:field="*{meccanico}" required>
 					<option value="">---Meccanico---</option>
 					<option th:each="meccanico : ${meccanici}" th:value="${meccanico.id}" th:text="${meccanico.nome} +' '+ ${meccanico.cognome}">
 					</option>

@@ -7,10 +7,7 @@
 </head>
 
 <body>
-	<nav>
-		<p class="titolo"OFFCINE ROMA</p>
-	</nav>
-
+		<nav><p class="titolo">OFFICINE ROMA</p></nav>
 	<div th:if="${meccanico}" th:object="${meccanico}" style="display: flex; justify-content: center;">
 		  <div class="box" style="display: flex;width: 400px;background-color: khaki">
 			<div class="info">
@@ -40,7 +37,6 @@
 				<button class="sub-button" type="submit" th:text="#{elimina.meccanico}"></button>
 			</form>
 		</div>
-
 		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
 
 	</div>

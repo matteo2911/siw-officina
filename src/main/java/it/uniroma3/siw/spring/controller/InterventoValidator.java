@@ -30,7 +30,7 @@ public class InterventoValidator implements Validator {
 			logger.debug("confermato: valori non nulli");
 			if (this.interventoService.alreadyExists((Intervento)i)) {
 				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
+				errors.reject("interventoEsiste");
 			}
 		}
 	}

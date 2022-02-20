@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic.css}" rel="stylesheet">
 <body>
-	<nav><p class="titolo">OFFCINE ROMA</p></nav>
+	<nav><p class="titolo">OFFICINE ROMA</p></nav>
     <div style="display: flex; justify-content: center;" >
     	<div class="box" style="background-color: khaki" th:if="${tipologiaIntervento}" th:object="${tipologiaIntervento}">
 		<p><b>TIPOLOGIA INTERVENTO:</b></p>
 			Nome: <span th:text="*{nome}">qui-va-nome</span><br>
 			Descrizione: <span th:text="*{descrizione}">qui-va-descrizione</span><br>
+			Costo: <span th:text="*{costo}">qui-va-costo</span><br>
    		</div>
 		<div class="box" style="background-color: powderblue;">
 			<p><b>GLI INTERVENTI:</b></p>
@@ -62,7 +63,6 @@
 				<button class="sub-button" type="submit" th:text="#{elimina.tipologiaIntervento}"></button>
 			</form>
 		</div>
-
 		<div><a href="/default"><button class="sub-button" style="margin-top: 19px;">Home</button></a></div>
 
 	</div>

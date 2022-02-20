@@ -8,7 +8,7 @@
 
 <body>
 	<nav>
-		<p class="titolo">OFFCINE ROMA</p>
+		<p class="titolo">OFFICINE ROMA</p>
 	</nav>
 
 	<form th:action="@{/admin/tipologiaIntervento}" method="POST" th:object="${tipologiaIntervento}">
@@ -19,22 +19,22 @@
 		<div style="text-align: right;margin-right: 35%;">
 			<div>
 				<span class="campo-form">Nome:</span>
-				<span><input type="text" th:field="*{nome}" /></span>
+				<span><input type="text" th:field="*{nome}"  required/></span>
 				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>
 			<div>
 				<span class="campo-form">Descrizione:</span>
-				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span><input type="text" th:field="*{descrizione}"   required/></span>
 				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 			</div>
 			<div>
 				<span class="campo-form">Costo:</span>
-				<span><input type="text" th:field="*{costo}" /></span>
+				<span><input type="text" th:field="*{costo}"  required/></span>
 				<span th:if="${#fields.hasErrors('costo')}" th:errors="*{costo}"></span>
 			</div>
 			<div>
 				<span class="campo-form">Codice:</span>
-				<span><input type="text" th:field="*{codice}" /></span>
+				<span><input type="text" th:field="*{codice}"  required/></span>
 				<span th:if="${#fields.hasErrors('codice')}" th:errors="*{codice}"></span>
 			</div>
 			<br>

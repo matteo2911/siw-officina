@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-//import static it.uniroma3.siw.spring.model.Credentials.DEFAULT_ROLE;
+import static it.uniroma3.siw.spring.model.Credentials.DEFAULT_ROLE;
 
 /**
  * The AuthConfiguration is a Spring Security Configuration.
@@ -47,6 +47,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
                 .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                
+                
+                .antMatchers(HttpMethod.GET, "/defualt/**").hasAnyAuthority(DEFAULT_ROLE)
+                .antMatchers(HttpMethod.POST, "/default/**").hasAnyAuthority(DEFAULT_ROLE)
                 // tutti gli utenti autenticati possono accere alle pagine rimanenti 
                 .anyRequest().authenticated()
 

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Intervento;
+import it.uniroma3.siw.spring.model.Meccanico;
+import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.repository.InterventoRepository;
 
 
@@ -28,8 +30,21 @@ public class InterventoService {
 	@Autowired
 	private CredentialsService credentialsService;
 	
+	@Autowired
+	private PrenotazioneService prenotazioneService;
+	
+	@Autowired
+	private UserService userService;
+	
+	
+	
+	
 	public MeccanicoService getMeccanicoService() {
 		return meccanicoService;
+	}
+	
+	public UserService getUserService() {
+		return userService;
 	}
 
 	@Transactional
@@ -69,7 +84,7 @@ public class InterventoService {
 	@Transactional
 	public List<Intervento> filtraLista(List<Intervento> lista) {
 		List<Intervento> interventi=this.tutti();
-		for(Intervento i:lista) {	//rimuovo opere che appartengono già alla collezione
+		for(Intervento i:lista) {	
 			interventi.remove(i);
 		}
 		return interventi;
@@ -102,7 +117,23 @@ public class InterventoService {
 		this.meccanicoService = meccanicoService;
 	}
 
+	public PrenotazioneService getPrenotazioneService() {
+		return prenotazioneService;
+	}
 
+
+	@Transactional
+	public List<Prenotazione> getPrenotazioniIntervento(Intervento i){
+		
+		
+		List<Prenotazione> lista = new ArrayList<>();
+		
+		for(Prenotazione p: prenotazioneService.tutti()) {
+			if(p.getIntervento()== i)
+				lista.add(p);
+		}
+		return lista;
+	}
 	
 
 }

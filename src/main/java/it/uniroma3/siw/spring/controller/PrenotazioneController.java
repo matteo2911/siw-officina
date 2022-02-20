@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +35,7 @@ public class PrenotazioneController {
     @Autowired
     private PrenotazioneValidator prenotazioneValidator;
 
-    @RequestMapping(value="/addPrenotazione", method = RequestMethod.GET)
+    @RequestMapping(value="/default/addPrenotazione", method = RequestMethod.GET)
     public String addPrenotazione(Model model) {
     	model.addAttribute("prenotazione", new Prenotazione());
     	model.addAttribute("interventi", prenotazioneService.getInterventoService().tutti());
@@ -43,16 +45,39 @@ public class PrenotazioneController {
     
     @RequestMapping(value = "/prenotazione/{id}", method = RequestMethod.GET)
     public String getPrenotazione(@PathVariable("id") Long id, Model model) {
+    	
     	Prenotazione p=prenotazioneService.prenotazionePerId(id);
     	model.addAttribute("prenotazione", p);
     	model.addAttribute("intervento",p.getIntervento());
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = this.prenotazioneService.getCredentialsService().getCredentials(userDetails.getUsername());
     	model.addAttribute("credentials", credentials);
-    	return "prenotazione.html";
+        if(p.getCliente()==credentials.getUser()) {     	
+        	model.addAttribute("prenotazione",p);
+        	model.addAttribute("intervento",p.getIntervento());
+        	model.addAttribute("credentials", credentials);
+        	
+        	return "prenotazione.html";
+        }
+        else
+        
+    	return "error.html";
     }   
     
-    @RequestMapping(value = "/prenotazioni", method = RequestMethod.GET)
+    
+    @RequestMapping(value = "/admin/prenotazioneClienti/{id}", method = RequestMethod.GET)
+    public String getPrenotazioneClienti(@PathVariable("id") Long id, Model model) {
+    	Prenotazione p=prenotazioneService.prenotazionePerId(id);
+    	model.addAttribute("prenotazione", p);
+    	model.addAttribute("intervento",p.getIntervento());
+    	model.addAttribute("cliente",p.getCliente());
+    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	Credentials credentials = this.prenotazioneService.getCredentialsService().getCredentials(userDetails.getUsername());
+    	model.addAttribute("credentials", credentials);
+    	return "prenotazione.html";
+    }
+    
+    @RequestMapping(value = "/default/prenotazioni", method = RequestMethod.GET)
     public String getPrenotazioni(Model model) {
     		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         	Credentials credentials = prenotazioneService.getCredentialsService().getCredentials(userDetails.getUsername());
@@ -60,6 +85,13 @@ public class PrenotazioneController {
         	model.addAttribute("credentials", credentials);
         	model.addAttribute("prenotazione", new Prenotazione());
     		return "prenotazioni.html";
+    }
+    
+    
+    @RequestMapping(value = "/admin/tuttePrenotazioni", method = RequestMethod.GET)
+    public String gettuttePrenotazioni(Model model) {
+    		model.addAttribute("prenotazioni", this.prenotazioneService.tutti());
+    		return "tuttePrenotazioni.html";
     }
     
     @RequestMapping(value = "/prenotazione", method = RequestMethod.POST)
@@ -70,20 +102,38 @@ public class PrenotazioneController {
     	model.addAttribute("credentials", credentials);
     	
     	this.prenotazioneValidator.validate(prenotazione, bindingResult);
-        if (!bindingResult.hasErrors()) {
-        		prenotazione.setCliente(credentials.getUser());
+  
+    	if (!bindingResult.hasErrors()) {
+    		if(prenotazione.getOraPrenotazione()> 8 && prenotazione.getOraPrenotazione()< 18) {
+        	
+        	
+        	Meccanico m= prenotazione.getIntervento().getMeccanico();
+        	List<Intervento> interventi= m.getInterventi();
+        	for(Intervento i: interventi) {
+        		for(Prenotazione p: i.getPrenotazioni()) {
+        			
+        			if(p.getOraPrenotazione()== prenotazione.getOraPrenotazione() && p.getDataPrenotazione().equals (prenotazione.getDataPrenotazione())) {
+        				
+            	    	model.addAttribute("errore", "il meccanico in questa ora e' occupato");
+            		return "error.html";
+            	    }
+        		}
+        	}
+                prenotazione.setCliente(credentials.getUser());
         		this.prenotazioneService.inserisci(prenotazione);
         		model.addAttribute("prenotazioni", this.prenotazioneService.prenotazioniPerUser(credentials.getUser()));
         		return "prenotazioni.html";
         	}
-        if(bindingResult.hasFieldErrors())
-            model.addAttribute("errore", "Dati inseriti non validi");
+    		else 
+    			model.addAttribute("errore","orario errato");
+    	}
+         
         else
-            model.addAttribute("errore", "il meccanico occupato");
-        
+        	model.addAttribute("errore", "il meccanico in questa ora e' occupato");
         return "error.html";
     }
-    
+       
+       
     
     
     @RequestMapping(value = "/eliminaPrenotazione/{id}", method = RequestMethod.POST)
@@ -91,6 +141,7 @@ public class PrenotazioneController {
     		Prenotazione p=prenotazioneService.prenotazionePerId(idPrenotazione);
     		prenotazioneService.eliminaPrenotazione(p);
     		model.addAttribute("Prenotazioni", this.prenotazioneService.tutti());
+    		
     		return "prenotazioni.html";
     }
 }

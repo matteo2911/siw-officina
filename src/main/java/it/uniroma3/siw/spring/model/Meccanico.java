@@ -30,10 +30,6 @@ public class Meccanico {
 	@OneToMany(mappedBy="meccanico")
 	private List<Intervento> interventi;
 	
-	@OneToMany(mappedBy="meccanico")
-	private List<Prenotazione> prenotazioni;
-	
-	
 
 	public void setId(long id) {
 		this.id = id;
@@ -75,13 +71,6 @@ public class Meccanico {
 		this.interventi = interventi;
 	}
 
-	public List<Prenotazione> getPrenotazioni() {
-		return prenotazioni;
-	}
-
-	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
-		this.prenotazioni = prenotazioni;
-	}
 
 	@Override
 	public int hashCode() {

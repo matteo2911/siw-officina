@@ -62,28 +62,17 @@ public class PrenotazioneService {
 	public List<Prenotazione> prenotazioniPerMeccanico(Meccanico meccanico) {
 		List<Prenotazione> prenotazioniUtente = new ArrayList<Prenotazione>();
 		for(Prenotazione p: this.tutti()) {
-			if(p.getMeccanico().equals(meccanico))
+			if(p.getIntervento().getMeccanico().equals(meccanico))
 				prenotazioniUtente.add(p);
 		}
 		return prenotazioniUtente;
 	}
 	
-	/*@Transactional
-	public List<Prenotazione> prenotazioniPerMaestro(Maestro maestro) {
-		List<Prenotazione> prenotazioniUtente = new ArrayList<Prenotazione>();
-		for(Prenotazione p: this.tutti()) {
-			if(p.getMaestro()!=null)
-				if(p.getMaestro().equals(maestro))
-					prenotazioniUtente.add(p);
-		}
-		return prenotazioniUtente;
-	}*/
-	
 	
 	@Transactional
 	public boolean alreadyExists(Prenotazione prenotazione) {
-		List<Prenotazione> prenotazioni = this.prenotazioneRepository.findByDataPrenotazioneAndOraPrenotazione(prenotazione.getDataPrenotazione(),prenotazione.getOraPrenotazione());
-		//List<Prenotazione> p = this.prenotazioneRepository.findByDataAndOraInizioAndOraFineAndMaestro(prenotazione.getData(), prenotazione.getOraInizio(), prenotazione.getOraFine(), prenotazione.getMaestro());
+		List<Prenotazione> prenotazioni = this.prenotazioneRepository.findByDataPrenotazioneAndOraPrenotazioneAndIntervento(prenotazione.getDataPrenotazione(),prenotazione.getOraPrenotazione(), prenotazione.getIntervento());
+		
 		if (prenotazioni.size() > 0 )//|| p.size() > 0)
 			return true;
 		else 
@@ -95,6 +84,7 @@ public class PrenotazioneService {
 		prenotazioneRepository.delete(p);
 	}
 	
+	 
 
 	public MeccanicoService getMeccanicoService() {
 		return meccanicoService;
@@ -119,6 +109,7 @@ public class PrenotazioneService {
 	public void setInterventoService(InterventoService intervantoService) {
 		this.interventoService = interventoService;
 	}
+	
 	
 	
 }

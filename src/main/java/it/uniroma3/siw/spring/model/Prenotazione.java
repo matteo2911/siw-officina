@@ -2,11 +2,6 @@ package it.uniroma3.siw.spring.model;
 
 
 
-
-
-
-
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -33,9 +28,6 @@ public class Prenotazione {
 
 	@Column(nullable=false)
 	private int oraPrenotazione;
-
-	@ManyToOne
-	private Meccanico meccanico;
 	
 	@ManyToOne
 	private User cliente;
@@ -43,11 +35,9 @@ public class Prenotazione {
 	@ManyToOne                              
 	private Intervento intervento;
 	
-
 	
-	public Meccanico getMeccanico() {
-		return meccanico;
-	}
+
+
 	
 	public Date getDataPrenotazione() {
 		return dataPrenotazione;
@@ -61,9 +51,7 @@ public class Prenotazione {
 	public void setOraPrenotazione(int oraPrenotazione) {
 		this.oraPrenotazione = oraPrenotazione;
 	}
-	public void setMeccanico(Meccanico meccanico) {
-		this.meccanico = meccanico;
-	}
+	
 	public User getCliente() {
 		return cliente;
 	}
@@ -76,6 +64,11 @@ public class Prenotazione {
 	public void setIntervento(Intervento intervento) {
 		this.intervento = intervento;
 	}
+	
+	public long setId(Long id) {
+		return this.id= id;
+		}
+	
 	@ModelAttribute("prenotazione.id")
 	public long getId() {
 		return id;
@@ -84,7 +77,7 @@ public class Prenotazione {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((meccanico == null) ? 0 : meccanico.hashCode());
+		
 		result = prime * result + ((dataPrenotazione == null) ? 0 : dataPrenotazione.hashCode());
 		result = prime * result + oraPrenotazione;
 		return result;
@@ -98,11 +91,6 @@ public class Prenotazione {
 		if (getClass() != obj.getClass())
 			return false;
 		Prenotazione other = (Prenotazione) obj;
-		if (meccanico == null) {
-			if (other.meccanico != null)
-				return false;
-		} else if (!meccanico.equals(other.meccanico))
-			return false;
 		if (dataPrenotazione == null) {
 			if (other.dataPrenotazione != null)
 				return false;
@@ -111,5 +99,6 @@ public class Prenotazione {
 		if (oraPrenotazione != other.oraPrenotazione)
 			return false;
 		return true;
-	}	
+	
+	}
 }

@@ -17,11 +17,15 @@ import it.uniroma3.siw.spring.service.PrenotazioneService;
 public class PrenotazioneValidator implements Validator {
 	@Autowired
 	private PrenotazioneService prenotazioneService;
+	
+	
 
     private static final Logger logger = LoggerFactory.getLogger(PrenotazioneValidator.class);
 	
+    
 	@Override
 	public void validate(Object p, Errors errors) {
+		  Prenotazione prenotazione = (Prenotazione) p;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dataPrenotazione", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "oraPrenotazione", "required");
 
@@ -31,7 +35,7 @@ public class PrenotazioneValidator implements Validator {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
-		}
+		}  
 	}
 
 	@Override

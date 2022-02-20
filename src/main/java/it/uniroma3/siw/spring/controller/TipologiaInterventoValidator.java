@@ -29,7 +29,7 @@ public class TipologiaInterventoValidator implements Validator {
 			logger.debug("confermato: valori non nulli");
 			if (this.tipologiaInterventoService.alreadyExists((TipologiaIntervento)t)) {
 				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
+				errors.reject("tipologiaEsiste");
 			}
 		}
 	}

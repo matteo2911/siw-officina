@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.Intervento;
+import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.TipologiaIntervento;
 import it.uniroma3.siw.spring.service.InterventoService;
 
@@ -71,8 +74,12 @@ public class InterventoController {
     public String eliminaIntervento(Model model, @PathVariable("id") Long idIntervento) {
     		
     		Intervento i=interventoService.interventoPerId(idIntervento);
+    		List<Prenotazione> prenotazioni=interventoService.getPrenotazioniIntervento(i);
+    		for(Prenotazione p: prenotazioni) {
+    			interventoService.getPrenotazioneService().eliminaPrenotazione(p);
+    		}
     		interventoService.eliminaIntervento(i);
     		model.addAttribute("intervento", this.interventoService.tutti());
     		return "interventi.html";
-    }
-}
+    }   
+ }

@@ -90,6 +90,7 @@ public class TipologiaInterventoController {
     	return "tipologiaIntervento.html";
     }
     
+    
     @RequestMapping(value = "/admin/rimuoviIntervento/{id}", method = RequestMethod.POST)
     public String rimuoviIntervento(@RequestParam("intervento") Long idIntervento, 
     									Model model, @PathVariable("id") Long idTipologiaIntervento) {
@@ -114,6 +115,5 @@ public class TipologiaInterventoController {
     		tipologiaInterventoService.eliminaTipologiaIntervento(t);
     		model.addAttribute("tipologiaInterventi", this.tipologiaInterventoService.tutti());
     		return "tipologiaInterventi.html";
-    }
-    
+    } 
 }

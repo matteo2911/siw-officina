@@ -11,5 +11,9 @@ public interface TipologiaInterventoRepository extends CrudRepository<TipologiaI
 	public List<TipologiaIntervento> findByNome(String nome);
 
 	public List<TipologiaIntervento> findByNomeOrCodice(String nome, String codice);
+	
+	public TipologiaIntervento findById(int id);
+
+	
 
 }
